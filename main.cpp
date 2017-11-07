@@ -3,8 +3,8 @@
 #include <time.h>
 #include <iostream>
 
-#define M 20
-#define N 20
+#define M 25
+#define N 25
 
 using namespace sf;
 
@@ -21,6 +21,17 @@ void pintar(int y,int x)
   if (campo[y][x+1]==0) pintar(y,x+1);
 }
 
+void rellenar(){
+
+    for(int i = 0; i<M; i++){
+        for(int j = 0; j<N; j++){
+            if(campo[i][j] == 2){
+                campo[i][j] = 1;
+            }
+        }
+    }
+}
+
 
 int main()
 {
@@ -29,6 +40,8 @@ int main()
     srand(time(0));
     RenderWindow window(VideoMode(M*ts,N*ts), "SplixIO");
     window.setFramerateLimit(60);
+
+    int origen = 1;
 
     Texture t1,t2;
 
@@ -44,15 +57,15 @@ int main()
 
     for(int i = 0; i<M; i++){
         for(int j = 0; j< N; j++){
-            if(i == 8 && j == 8) campo[i][j] = 1;
-            if(i == 8 && j == 9) campo[i][j] = 1;
-            if(i == 8 && j == 10) campo[i][j] = 1;
-            if(i == 9 && j == 8) campo[i][j] = 1;
-            if(i == 9 && j == 9) campo[i][j] = 1;
-            if(i == 9 && j == 10) campo[i][j] = 1;
-            if(i == 10 && j == 8) campo[i][j] = 1;
-            if(i == 10 && j == 9) campo[i][j] = 1;
-            if(i == 10 && j == 10) campo[i][j] = 1;
+            if(i == 8 && j == 8) campo[i][j] = origen;
+            if(i == 8 && j == 9) campo[i][j] = origen;
+            if(i == 8 && j == 10) campo[i][j] = origen;
+            if(i == 9 && j == 8) campo[i][j] = origen;
+            if(i == 9 && j == 9) campo[i][j] = origen;
+            if(i == 9 && j == 10) campo[i][j] = origen;
+            if(i == 10 && j == 8) campo[i][j] = origen;
+            if(i == 10 && j == 9) campo[i][j] = origen;
+            if(i == 10 && j == 10) campo[i][j] = origen;
         }
     }
 
@@ -92,13 +105,14 @@ int main()
          if (campo[y][x]==2) return 0;
          if (campo[y][x]==0) campo[y][x]=2;
          if (campo[x][y]==1) {
+
+            rellenar();
             for(int i = 0; i < M; i++){
                 for(int j = 0; j< N; j++){
                     if(campo[i][j]==0){
-                        if(campo[i][j-1] == 2 && campo[i-1][j] == 2){
+                        if(campo[i][j-1] == 1 && campo[i-1][j] == 1){
                             pintar(i,j);
-                            campo[i][j] = 1;
-                        }
+                       }
                     }
                 }
             }
@@ -118,7 +132,7 @@ int main()
             }
         }
 
-        sTile.setTextureRect(IntRect(0,0,ts,ts));
+        sTile.setTextureRect(IntRect(36,0,ts,ts));
         sTile.setPosition(x*ts,y*ts);
         window.draw(sTile);
 
