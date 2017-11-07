@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1510079329 source:d:\proyectos\codeblocks\splix_paradigmas\main.cpp
+	<SFML/Graphics.hpp>
+	<SFML/Audio.hpp>
+	<time.h>
+	<iostream>
+
